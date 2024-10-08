@@ -7,7 +7,7 @@ function LoginForm(){
 
     const handleSubmit=async(e)=>{
         e.preventDefault();
-        const response=await fetch('/watchapp/login',{
+        const response=await fetch('/watchapp/login/',{
             method:'POST',
             headers:{
                 'Content-type':'application/json',
@@ -30,14 +30,14 @@ function LoginForm(){
                     type='text'
                     className='login-input'
                     value={email}
-                    onChange={(e)=>setUsername(e.target.value)}
+                    onChange={(e)=>setEmail(e.target.value)}
                     placeholder='email'                
                 />
                 <input
                     type='password'
                     className='login-input'
                     value={password}
-                    onChange={(e)=>setUsername(e.target.value)}
+                    onChange={(e)=>setPassword(e.target.value)}
                     placeholder='Password'                
                 />
                 <button type='submit' className='login-button'>Login</button>
