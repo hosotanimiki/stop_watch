@@ -1,12 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { useEffect, useState } from 'react';
+import LoginForm from './components/LoginForm';
 
 function App() {
   const [data, setData] = useState(null);
 
     useEffect(() => {
-        fetch('/api/my-api/')
+        fetch('/watchapp/login/')
             .then(response => response.json())
             .then(data => setData(data));
     }, []);
@@ -27,6 +28,9 @@ function App() {
           Learn React
         </a>
       </header>
+      <div>
+          <LoginForm />
+      </div>
     </div>
   );
 }
