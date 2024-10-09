@@ -8,6 +8,8 @@ from rest_framework import status
 
 from .serializers import LoginSerializers
 
+import logging
+logger = logging.getLogger(__name__)
 
 class LoginView(APIView):
     def post(self, request):

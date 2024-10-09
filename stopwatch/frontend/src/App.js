@@ -4,17 +4,10 @@ import React, { useEffect, useState } from 'react';
 import LoginForm from './components/LoginForm';
 
 function App() {
-  const [data, setData] = useState(null);
-
-    useEffect(() => {
-        fetch('/watchapp/login/')
-            .then(response => response.json())
-            .then(data => setData(data));
-    }, []);
-
+  
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -27,7 +20,7 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </header> */}
       <div>
           <LoginForm />
       </div>
