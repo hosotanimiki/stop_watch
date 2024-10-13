@@ -123,9 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'frontend/build/static'),
-]
+STATICFILES_DIRS = []
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -137,14 +135,23 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+    ]
+}
+
 
 # react関係
-# CORS_ALLOWED_ORIGINS = [
-#     'http://localhost:3000',
-# ]
-CORS_ALLOW_ALL_ORIGINS=True
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8000',
+]
 
-
+CSRF_TRUSTED_ORIGINS = [
+    # "http://localhost:3000", 
+    "http://localhost:8000"
+]
+CSRF_COOKIE_HTTPONLY = False
 
 
 
