@@ -33,31 +33,22 @@ function LoginForm(){
         console.log('Sending request with:', { email, password });
         try{
             const requestData = JSON.stringify({ email, password });//JSON形式にしてリクエストデータに格納
-            console.log('Request data:', requestData);
             const csrfToken = getCookie('csrftoken')  //トークンを取得してリクエストのヘッダーに設定
-            console.log('csrfToken',csrfToken)
+
             // fetchAPIを利用してサーバーにポストリクエストを送信
             const response=await fetch('/watchapp/login/',{
                 method:'POST',
                 headers:{
-                    'Content-type':'application/json',
-                    'X-CSRF-TOKEN': `${csrfToken}`,
+                    'Content-type':'application/json',  //常に？
+                    'X-CSRF-TOKEN': `${csrfToken}`,  //どっち？
                     'X-CSRFTOKEN': `${csrfToken}`,
                 },
-                body: requestData,
-                credentials: 'include',
+                body: requestData, //JSON形式にしてリクエストデータに格納 
             });
-            console.log('Response status:', response.status);
-            response.headers.forEach((value, name) => {
-                console.log(`${name}: ${value}`);
-            });
-            console.log('Response headers:', response.headers);
-        
-
+            
             // レスポンスを確認し、エラーハンドリング
             if (!response.ok) {
                 const errorText = await response.text();
-                console.error('Error response text:', errorText);
                 try {
                     const errorData = JSON.parse(errorText);
                     throw new Error(errorData.message || 'ログインに失敗しました');
@@ -65,13 +56,12 @@ function LoginForm(){
                     throw new Error('サーバーから不正なレスポンスが返されました: ' + errorText);
                 }
             }
-            // const data = await response.json().catch(() => {
+            
             await response.json().catch(() => {   
                 throw new Error('サーバーから不正なレスポンスが返されました');
             });
-            navigate('/stopwatch')
+            navigate('/stopwatch') //画面遷移→ストップウォッチ画面へ
         }catch (error) {
-            console.error('Error:', error);
             alert(error.message);
         }
     };

@@ -41,18 +41,25 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'watchapp',
-    'corsheaders',
+    'corsheaders',  #cors（オリジン間リソース共有）用パッケージ
 ]
+
+
+#同一オリジンポリシーとは
+#あるオリジンで読み込まれたリソース（HTML, スクリプト, Cookie など）が、
+#異なるオリジン（クロスオリジンとも呼ばれる）のリソースとの通信・アクセスを制限する、Web ブラウザが持つセキュリティ機能
+#2つのオリジンのスキーム＋FQDN＋ポートが全て一致した場合のみ同一オリジン
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',     #csrfトークン用
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  #cors用
 ]
 
 ROOT_URLCONF = 'stopwatch.urls'
@@ -142,13 +149,13 @@ REST_FRAMEWORK = {
 }
 
 
-# react関係
+
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',
 ]
 
-CSRF_TRUSTED_ORIGINS = [
-    # "http://localhost:3000", 
+#これがないと403エラー
+CSRF_TRUSTED_ORIGINS = [ 
     "http://localhost:8000"
 ]
 CSRF_COOKIE_HTTPONLY = False

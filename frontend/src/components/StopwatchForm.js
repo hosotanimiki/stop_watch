@@ -3,13 +3,18 @@ import './StopwatchForm.css';
 
 
 function StopwatchForm(){
+    
+    //変数定義
+    // usestateについて
+    // [状態変数、値を更新するための関数]=usestate(初期値)
     const [startTime, setStartTime]=useState(0);
     const [stopTime, setStopTime]=useState(0);
     const [isRunning, setIsRunning]=useState(false);
     const [display, setDisplay]=useState('00:00.000');
     const [laps, setLaps]=useState([])
-    const timeoutID=useRef(null)
+    const timeoutID=useRef(null)  //タイマー制御、クリアが可能に
     
+    //時間表示のフォーマット
     const formatTime=(time)=>{
         const m=String(time.getUTCMinutes()).padStart(2, '0');
         const s=String(time.getUTCSeconds()).padStart(2, '0');
@@ -20,7 +25,8 @@ function StopwatchForm(){
     const displayTime=useCallback(()=>{
         const currentTime=new Date(Date.now()-startTime+stopTime);
         setDisplay(formatTime(currentTime));
-        timeoutID.current=setTimeout(displayTime, 10);
+        //setTimeoutは、第二引数に指定した時間経過後に第一引数の関数を呼び出す関数で、戻り値はtimeoutID
+        timeoutID.current=setTimeout(displayTime, 10);  
     },[startTime,stopTime]);
 
     const start=()=>{
@@ -28,8 +34,8 @@ function StopwatchForm(){
         setIsRunning(true);
     };
     const stop=()=>{
-        clearTimeout(timeoutID.current);
-        setStopTime((prev)=>prev+(Date.now()-startTime));
+        clearTimeout(timeoutID.current);  //タイマークリア
+        setStopTime((prev)=>prev+(Date.now()-startTime)); //????
         setIsRunning(false);
     };
     const reset=()=>{
@@ -40,14 +46,14 @@ function StopwatchForm(){
         setLaps([]);
     };
     const lap=()=>{
-        setLaps([...laps, display]);  //displayを追加していく
+        setLaps([...laps, display]);  //displayを追加
     };
 
     useEffect(()=>{
         if (isRunning){
-            displayTime();
+            displayTime(); //動いている場合時間更新
         }else{
-            clearTimeout(timeoutID.current);
+            clearTimeout(timeoutID.current); //止まっているならクリア
         }
         return()=>clearTimeout(timeoutID.currentTime);
     },[isRunning, displayTime]);
