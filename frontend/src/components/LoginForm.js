@@ -1,9 +1,15 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import './LoginForm.css';
 
 function LoginForm(){
+    // usestateについて
+    // [状態変数、値を更新するための関数]=usestate(初期値)
     const[email, setEmail]=useState('');
     const[password, setPassword]=useState('');
+    const navigate = useNavigate();//ページ遷移用変数
+
+    // csrftokenを取得するための関数
     const getCookie = (name) => {
         let cookieValue = null;
         console.log('document.cookie',  document.cookie.length)
@@ -21,15 +27,16 @@ function LoginForm(){
         return cookieValue;
     };    
     
-
+    // フォームの送信処理
     const handleSubmit=async(e)=>{
-        e.preventDefault(); 
+        e.preventDefault(); //ページのリロード防止
         console.log('Sending request with:', { email, password });
         try{
-            const requestData = JSON.stringify({ email, password });
+            const requestData = JSON.stringify({ email, password });//JSON形式にしてリクエストデータに格納
             console.log('Request data:', requestData);
-            const csrfToken = getCookie('csrftoken')
+            const csrfToken = getCookie('csrftoken')  //トークンを取得してリクエストのヘッダーに設定
             console.log('csrfToken',csrfToken)
+            // fetchAPIを利用してサーバーにポストリクエストを送信
             const response=await fetch('/watchapp/login/',{
                 method:'POST',
                 headers:{
@@ -46,6 +53,8 @@ function LoginForm(){
             });
             console.log('Response headers:', response.headers);
         
+
+            // レスポンスを確認し、エラーハンドリング
             if (!response.ok) {
                 const errorText = await response.text();
                 console.error('Error response text:', errorText);
@@ -60,14 +69,14 @@ function LoginForm(){
             await response.json().catch(() => {   
                 throw new Error('サーバーから不正なレスポンスが返されました');
             });
-            alert('ログイン成功');
+            navigate('/stopwatch')
         }catch (error) {
             console.error('Error:', error);
             alert(error.message);
         }
     };
-
-
+        
+    // HTMLについて
     return(
         <div className='login-container'>
             <form className='login-form' onSubmit={handleSubmit}>

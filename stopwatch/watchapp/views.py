@@ -13,11 +13,11 @@ logger = logging.getLogger(__name__)
 
 class LoginView(APIView):
     def post(self, request):
-        serializer=LoginSerializers(data=request.data)
+        serializer=LoginSerializers(data=request.data)#ログインシリアライザーのインスタンスの初期化
         if serializer.is_valid():
             user=serializer.validated_data['user']
             login(request, user)
-            return Response({'message': 'ログイン成功'}, status=status.HTTP_200_OK)
+            return Response({'message': 'ログイン成功'}, status=status.HTTP_200_OK)#認証成功時→遷移ページはreactに記述
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -29,6 +29,6 @@ def get_csrf_token(request):
     return JsonResponse({'detail': 'CSRF cookie set'})
 
 
-def stopwatch(request):
+# def stopwatch(request):
     
-    return render(request, "watchapp/stopwatch.html")
+#     return render(request, "watchapp/stopwatch.html")

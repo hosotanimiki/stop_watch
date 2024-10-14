@@ -1,30 +1,24 @@
-import logo from './logo.svg';
+// アプリ全体でのルーティングの設定
+
+// import logo from './logo.svg';
 import './App.css';
-import React, { useEffect, useState } from 'react';
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';//追記ルーティング用
+//画面
 import LoginForm from './components/LoginForm';
+import StopwatchForm from './components/StopwatchForm';
+
 
 function App() {
   
   return (
-    <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-      <div>
-          <LoginForm />
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/login' Component={LoginForm}/>
+        <Route path='/stopwatch' Component={StopwatchForm}/>
+        <Route path='/' exact Component={LoginForm}/>
+      </Routes>
+    </Router>
   );
 }
 
