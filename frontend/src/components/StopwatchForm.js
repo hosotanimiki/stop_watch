@@ -1,4 +1,5 @@
 import React,{useState, useRef, useEffect, useCallback} from 'react';
+import './StopwatchForm.css';
 
 
 function StopwatchForm(){
@@ -67,9 +68,9 @@ function StopwatchForm(){
             </div>
             <div>
                 <h2>ラップ</h2>
-                <ul>
+                <ul className='lap-list'>
                     {laps.map((lap, index)=>(
-                        <li key={index}>{lap}</li>
+                        <li className='laps' key={index}>{lap}</li>
                     ))}
                 </ul>
             </div>
