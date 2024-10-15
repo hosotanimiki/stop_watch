@@ -25,16 +25,3 @@ class LoginView(APIView):
                 {"message": "ログイン成功"}, status=status.HTTP_200_OK
             )  # 認証成功時→遷移ページはreactに記述
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-# from django.http import JsonResponse
-# from django.views.decorators.csrf import ensure_csrf_cookie
-
-# @ensure_csrf_cookie
-# def get_csrf_token(request):
-#     return JsonResponse({'detail': 'CSRF cookie set'})
-
-
-# def stopwatch(request):
-
-#     return render(request, "watchapp/stopwatch.html")
