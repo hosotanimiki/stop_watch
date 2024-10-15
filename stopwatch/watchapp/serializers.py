@@ -9,24 +9,28 @@ from rest_framework.exceptions import AuthenticationFailed
 
 # ログインシリアライザー
 # ログインプロセスの一部としてユーザーの認証とバリデーションを行う
-class LoginSerializers(serializers.Serializer):
-    email=serializers.EmailField()
-    password=serializers.CharField(write_only=True)
 
-# バリデーション
+
+# modelserializerの継承
+class LoginSerializers(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)
+
+    # バリデーション
     def validate(self, data):
-        email=data.get('email')
-        password=data.get('password')
+        email = data.get("email")
+        password = data.get("password")
         if email and password:
             # authenticate(username(ユーザーを特定するための情報), password)
-            user =authenticate(username=email, password=password)
+            user = authenticate(username=email, password=password)
             if user is None:
-                raise AuthenticationFailed('資格情報が無効です')
+                raise AuthenticationFailed("資格情報が無効です")
             if not user.is_active:
-                raise AuthenticationFailed('ユーザーアカウントが無効です')
+                raise AuthenticationFailed("ユーザーアカウントが無効です")
         else:
-            raise serializers.ValidationError('メールアドレスとパスワードを入力してください')
-        
-        data['user']=user
+            raise serializers.ValidationError(
+                "メールアドレスとパスワードを入力してください"
+            )
+
+        data["user"] = user
         return data
-        

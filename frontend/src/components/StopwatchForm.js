@@ -1,4 +1,4 @@
-import React,{useState, useRef, useEffect, useCallback} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import './StopwatchForm.css';
 
 
@@ -35,7 +35,7 @@ function StopwatchForm(){
     };
     const stop=()=>{
         clearTimeout(timeoutID.current);  //タイマークリア
-        setStopTime((prev)=>prev+(Date.now()-startTime)); //????
+        setStopTime((prev)=>prev+(Date.now()-startTime)); //変数の中に変数を入れることができる
         setIsRunning(false);
     };
     const reset=()=>{
