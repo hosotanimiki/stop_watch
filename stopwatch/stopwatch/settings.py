@@ -168,3 +168,6 @@ def get_allowed_hosts():
 ALLOWED_HOSTS = get_allowed_hosts()
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 USE_X_FORWARDED_HOST = True
+
+
+AUTH_USER_MODEL = "watchapp.User"
