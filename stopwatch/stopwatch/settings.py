@@ -137,10 +137,10 @@ STATICFILES_DIRS = []
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # カスタムバックエンド
-AUTHENTICATION_BACKENDS = [
-    "watchapp.backends.EmailBackend",
-    "django.contrib.auth.backends.ModelBackend",
-]
+# AUTHENTICATION_BACKENDS = [
+#     "watchapp.backends.EmailBackend",
+#     "django.contrib.auth.backends.ModelBackend",
+# ]
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
