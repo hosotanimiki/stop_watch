@@ -136,7 +136,7 @@ STATICFILES_DIRS = []
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# カスタムバックエンド
+# # カスタムバックエンド
 # AUTHENTICATION_BACKENDS = [
 #     "watchapp.backends.EmailBackend",
 #     "django.contrib.auth.backends.ModelBackend",
@@ -147,7 +147,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.AllowAny",
     ],
 }
 
@@ -161,13 +161,13 @@ CSRF_TRUSTED_ORIGINS = ["http://localhost:8000"]
 CSRF_COOKIE_HTTPONLY = False
 
 
-def get_allowed_hosts():
-    return ["*"]
+# def get_allowed_hosts():
+#     return ["*"]
 
 
-ALLOWED_HOSTS = get_allowed_hosts()
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-USE_X_FORWARDED_HOST = True
+# ALLOWED_HOSTS = get_allowed_hosts()
+# SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+# USE_X_FORWARDED_HOST = True
 
 
 AUTH_USER_MODEL = "watchapp.User"

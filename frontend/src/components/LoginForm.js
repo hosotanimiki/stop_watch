@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginForm.css';
 
@@ -40,7 +40,7 @@ function LoginForm(){
                 method:'POST',
                 headers:{
                     'Content-type':'application/json',  //常に？
-                    'X-CSRF-TOKEN': `${csrfToken}`,  //どっち？
+                    'X-CSRF-TOKEN': `${csrfToken}`,  
                     'X-CSRFTOKEN': `${csrfToken}`,
                 },
                 body: requestData, //JSON形式にしてリクエストデータに格納 
