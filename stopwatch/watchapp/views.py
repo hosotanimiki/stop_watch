@@ -13,10 +13,14 @@ logger = logging.getLogger(__name__)
 
 
 class LoginView(APIView):
+    serializera_class = "LoginSerializers"
+    permission_classes = []
+
     def post(self, request):
         serializer = LoginSerializers(
             data=request.data
         )  # ログインシリアライザーのインスタンスの初期化
+
         # raise_exception
         if serializer.is_valid(raise_exception=True):
             user = serializer.validated_data["user"]
