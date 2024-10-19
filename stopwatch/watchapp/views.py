@@ -13,9 +13,7 @@ logger = logging.getLogger(__name__)
 
 class LoginView(APIView):
     serializera_class = "LoginSerializers"
-    permission_classes = [
-        AllowAny
-    ]  # ログインユーザーのみ許可  認証済みの場合のみアクセスできる
+    permission_classes = [AllowAny]  # ログインしていないユーザーでも可
 
     def post(self, request):
         serializer = LoginSerializers(

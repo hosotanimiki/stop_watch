@@ -14,9 +14,11 @@ import StopwatchForm from './components/StopwatchForm';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated]=useState(false);
+  console.log(isAuthenticated)
   useEffect(() => {
     // localStorageから認証トークンを取得
     const token = localStorage.getItem('authToken');
+    console.log('authToken', token)
     if (token) {
       setIsAuthenticated(true);
     }

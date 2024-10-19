@@ -60,7 +60,7 @@ function LoginForm(){
             await response.json().catch(() => {   
                 throw new Error('サーバーから不正なレスポンスが返されました');
             });
-            navigate('/stopwatch') //画面遷移→ストップウォッチ画面へ
+            navigate('/stopwatch');//画面遷移→ストップウォッチ画面へ
         }catch (error) {
             alert(error.message);
         }
